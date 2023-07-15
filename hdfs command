@@ -1,0 +1,86 @@
+
+
+HDFS COMMAND
+============
+
+1.hdfs fs / hdfs dfs (will give you all list of the command)
+2.ls (we are listening files on the gateway node)
+3 hadoop fs -ls /(inside the root direcectory what is present) 
+4.hadoop fs -ls -t(newest file at the top)
+5.hadoop fs -ls -t - r (in the reverse order)
+6.hadoop fs -ls -S /(sort based on the size)
+7.6.hadoop fs -ls -S -h/(sort based on the size with the human readable form)
+8.hadoop fs -ls -R /(recursively list the root)
+9.6.hadoop fs -ls /user |grep  
+10.mkdir (to create or make a directory)
+
+[itv007773@g01 ~]$ hadoop fs -mkdir /user/itv007773/retail_db
+[itv007773@g01 ~]$ hadoop fs -ls 
+Found 3 items
+drwxr-xr-x   - itv007773 supergroup          0 2023-07-11 08:30 .sparkStaging
+drwxr-xr-x   - itv007773 supergroup          0 2023-07-05 07:19 data
+drwxr-xr-x   - itv007773 supergroup          0 2023-07-15 04:12 retail_db
+
+
+11.What if you wnat to create one directorey into anotrher  two directonary in a row.
+
+
+[itv007773@g01 ~]$ hadoop fs -mkdir /user/itv007773/dir1/dir2 [it will not work ]
+mkdir: `hdfs://m01.itversity.com:9000/user/itv007773/dir1': No such file or directory
+
+[itv007773@g01 ~]$ hadoop fs -mkdir -p /user/itv007773/dir1/dir2 [-p is for pattern]
+[itv007773@g01 ~]$ hadoop fs -ls dir1
+Found 1 items
+drwxr-xr-x   - itv007773 supergroup          0 2023-07-15 04:16 dir1/dir2
+
+12.Remove a file
+
+hadoop fs -mkdir retail_db
+
+for deleting the dir1 which has some dir2
+then it willl done by this command
+
+hadoop fs -rm -R dir1
+
+13.
+bring a file from loacal to hdfs.
+
+hadoop fs -mkdir data
+ ls -ltrh /data/trendytech
+
+total 406M
+-rw-r--r-- 1 root      root     5.7K Oct 27  2020 kv1.txt
+-rw-r--r-- 1 root      root      18K Oct 28  2020 search_data.txt
+-rw-r--r-- 1 root      root     134K Oct 29  2020 customer-orders.csv
+-rw-r--r-- 1 root      root      94K Oct 29  2020 google-ads-data.csv
+-rw-r--r-- 1 root      root      78K Oct 29  2020 boringwords.txt
+-rw-r--r-- 1 root      root     349M Oct 29  2020 bigLog.txt
+-rw-r--r-- 1 root      root      159 Oct 30  2020 samplefile.txt
+-rw-r--r-- 1 root      root     8.1K Oct 30  2020 friends-data.csv
+-rwxr-xr-x 1 root      root      58M Oct 30  2020 students.csv
+drwxr-xr-x 2 itv005857 students 4.0K Apr 23 06:09 mapreduce_jars
+
+
+it is done by two
+1.PUT
+2.COPYFROMLOCAL
+
+hadoop fs -put <local file path> <hdfs path>
+hadoop fs -copyFromLocal <local file path> <hdfs path>
+
+hadoop fs -put/data/trendytech/bigLog.txt/ user/itv  /data
+hadoop fs -ls
+14.
+
+from hdfs to local
+1.copyfromlocal
+2.get
+ hadoop fs -get  /user/itv007773/data/bigLog.txt .
+ls -ltr
+
+
+
+
+
+
+
